@@ -1,36 +1,57 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Qisthidev\AuthDevice\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Qisthidev\AuthDevice\AuthDeviceServiceProvider;
 
 class TestCase extends Orchestra
 {
-    public function setUp(): void
+    use RefreshDatabase;
+
+    protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Qisthidev\\AuthDevice\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
-            SkeletonServiceProvider::class,
+            AuthDeviceServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
+        config()->set('database.connections.testing', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]);
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        $migration->up();
-        */
+        // Load the auth-device config
+        config()->set('auth-device', require __DIR__.'/../config/auth-device.php');
+
+        // Add the device guard to auth config
+        config()->set('auth.guards.device', [
+            'driver' => 'device',
+            'provider' => 'device',
+        ]);
+
+        config()->set('auth.providers.device', [
+            'driver' => 'device',
+        ]);
+    }
+
+    protected function defineDatabaseMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 }
