@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('code', 50)->unique();
             $table->string('token', 255)->unique();
-            $table->enum('status', ['pending', 'accepted', 'expired', 'revoked'])->default('pending');
+            $table->string('status', 20)->default('pending');
             $table->timestamp('expires_at')->nullable();
             $table->timestamp('accepted_at')->nullable();
             $table->json('metadata')->nullable();
