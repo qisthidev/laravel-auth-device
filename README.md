@@ -17,8 +17,8 @@ A Laravel package for device-based authentication. Users authenticate using regi
 
 ## Requirements
 
-- PHP 8.1+
-- Laravel 10.x or 11.x
+- PHP 8.2+
+- Laravel 12.x
 
 ## Installation
 

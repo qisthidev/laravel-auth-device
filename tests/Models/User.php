@@ -9,7 +9,9 @@ use Qisthidev\AuthDevice\Traits\HasDevices;
 
 class User extends Authenticatable
 {
-    use CanInvite, HasDevices, Notifiable;
+    use CanInvite;
+    use HasDevices;
+    use Notifiable;
 
     protected $fillable = [
         'name',
