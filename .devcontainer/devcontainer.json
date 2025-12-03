@@ -2,8 +2,7 @@
 	"name": "PHP",
 	"image": "mcr.microsoft.com/devcontainers/php:8.2",
 	"features": {
-		"ghcr.io/devcontainers/features/node:1": {},
-		"ghcr.io/devcontainers/features/composer:1": {}
+		"ghcr.io/devcontainers/features/node:1": {}
 	},
 	"customizations": {
 		"vscode": {
