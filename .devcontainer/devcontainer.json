@@ -1,0 +1,16 @@
+{
+	"name": "PHP",
+	"image": "mcr.microsoft.com/devcontainers/php:8.2",
+	"features": {
+		"ghcr.io/devcontainers/features/composer:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"bmewburn.vscode-intelephense-client",
+				"mwu-dev.laravel-blade-snippets"
+			]
+		}
+	},
+	"postCreateCommand": "composer install"
+}
