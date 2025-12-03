@@ -41,7 +41,7 @@ class InvitationNotification extends Notification implements ShouldQueue
         $code = $this->invitation->code;
         $expiresAt = $this->invitation->expires_at;
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject("You've been invited to {$appName}")
             ->greeting('Hello!')
             ->line("You have been invited to join {$appName}.")

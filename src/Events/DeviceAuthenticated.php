@@ -9,7 +9,8 @@ use Qisthidev\AuthDevice\Models\Device;
 
 class DeviceAuthenticated
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public Device $device;
 

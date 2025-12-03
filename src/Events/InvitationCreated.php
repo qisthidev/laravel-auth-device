@@ -9,7 +9,8 @@ use Qisthidev\AuthDevice\Models\Invitation;
 
 class InvitationCreated
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public Invitation $invitation;
 
